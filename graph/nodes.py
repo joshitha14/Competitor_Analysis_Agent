@@ -174,7 +174,21 @@ def compile_brief(state: ResearchState) -> dict:
     lines = [f"# Competitor Brief: {company}",
              f"_Generated {date.today().isoformat()}_", ""]
 
-    for comp in state["competitors"]:
+    # Discovery can route straight here having found nothing (e.g. every
+    # search failed), in which case `competitors` was never set. Say so
+    # plainly rather than rendering an empty brief.
+    competitors = state.get("competitors") or []
+    if not competitors:
+        lines += [
+            "> **No competitors could be identified.**",
+            ">",
+            "> Discovery returned no usable candidates - most often because "
+            "the search tool was unavailable. The run diagnostics below show "
+            "what failed. Nothing has been inferred or invented.",
+            "",
+        ]
+
+    for comp in competitors:
         lines.append(f"## {comp['name']}")
         if comp["status"] == "failed":
             lines += [f"> **Research incomplete.** {comp['error']}", ""]
