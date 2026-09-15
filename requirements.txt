@@ -1,0 +1,12 @@
+# Pinned to the versions this project was verified against.
+# Note: the code was originally written for langgraph 0.2.x, but the
+# interrupt()/Command(resume=...) contract it relies on is unchanged in 1.x
+# and is verified working. Re-test the gates if you bump langgraph.
+langgraph==1.2.11
+langgraph-checkpoint-sqlite==3.1.1
+langchain-core==1.6.3
+langchain-openai==1.6.2
+pydantic==2.13.5
+requests==2.34.2
+python-dotenv==1.2.3
+streamlit==1.63.0
