@@ -1,6 +1,6 @@
 .env
 data/
-samples/
+# samples/ is committed - the generated briefs are the project's output.
 __pycache__/
 *.py[cod]
 .venv/

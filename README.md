@@ -37,7 +37,25 @@ python run_cli.py --company "Notion" --auto     # skip both gates
 streamlit run ui/app.py
 ```
 
-Briefs are written to `samples/`.
+Briefs are written to `samples/`, which holds example output from real runs.
+
+**Always supply `--context`.** It anchors both discovery and the per-competitor
+research queries. Without it, research falls back to generic SaaS vocabulary
+and retrieves the wrong product line (or, for generically-named companies, the
+wrong company outright).
+
+### Troubleshooting
+
+`ModuleNotFoundError: No module named 'langgraph.checkpoint.sqlite'` means
+Streamlit is running from the system Python rather than the venv. Either
+activate the venv first, or invoke it explicitly:
+
+```powershell
+.venv\Scripts\python.exe -m streamlit run ui/app.py
+```
+
+If PowerShell blocks activation, `Set-ExecutionPolicy -Scope Process RemoteSigned`
+clears it for that window.
 
 ## Layout
 
