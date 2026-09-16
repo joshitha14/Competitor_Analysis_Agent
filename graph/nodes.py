@@ -106,11 +106,18 @@ def research(state: ResearchState) -> dict:
     errors: list[str] = []
     calls = 0
 
+    # The market context anchors both queries. Without it "X pricing plans
+    # features" is SaaS-shaped vocabulary that drifts badly: for a bank it
+    # lands on small-business merchant services, and for a small firm with a
+    # generic name it retrieves a different company entirely. Quoting the
+    # name keeps multi-word companies together.
+    ctx = (state.get("context") or "").strip()
     for comp in state["competitors"]:
         name = comp["name"]
+        anchor = f'"{name}" {ctx}'.strip()
         raw: list[dict] = []
-        for kind, q in (("web", f"{name} pricing plans features"),
-                        ("news", f"{name} news announcement")):
+        for kind, q in (("web", f"{anchor} pricing cost"),
+                        ("news", f"{anchor} news announcement")):
             try:
                 raw += search(q, kind=kind, num=5)
                 calls += 1
