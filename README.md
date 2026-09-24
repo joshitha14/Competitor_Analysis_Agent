@@ -67,6 +67,15 @@ data/       sqlite checkpoints + search cache (gitignored)
 samples/    generated briefs
 ```
 
+## Screenshots
+
+`StreamlitScreenshots/` walks through a full run: the start screen, Gate 1 with
+the candidate list, research in progress, and the compiled brief at Gate 2.
+
+![Start screen](StreamlitScreenshots/1.png)
+
+![The compiled brief](StreamlitScreenshots/4.png)
+
 ## Design notes
 
 - **A failed competitor doesn't kill the run.** It's marked `failed` and the
